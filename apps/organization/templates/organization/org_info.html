@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <title>View Trip</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header_box">
+            <div class="welcome_box">
+                <h1>Hello {{ user.first_name }}!</h1>
+            </div>
+            <div class="links">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        
+        <div class="box_header">
+            <h4>Organization {{org.organization}}</h4>
+        </div>
+        <div class="form-group row">
+            <p for="book_title" class="col-sm-7 col-form-label">Organization: {{org.organization}}</p>
+        </div>
+        <div class="form-group row">
+            <p for="book_title" class="col-sm-7 col-form-label">Description: {{org.description}}</p>
+        </div>
+        <div class="form-group row">
+            <p for="book_title" class="col-sm-7 col-form-label">Created On: {{org.created_at}}</p>
+        </div>
+        <div class="form-group row">
+            <p for="book_title" class="col-sm-7 col-form-label">Last Updated: {{org.updated_at}}</p>
+        </div>
+        <div class="form-group row">
+            <p for="book_title" class="col-sm-7 col-form-label">Created by: {{org.creator.first_name}}</p>
+        </div>
+        
+        <div class="box_header">
+            <h4>People who've joined the group:</h4>
+        </div>
+        {% for join in joining %}
+        <p>{{join.first_name}}</p>
+        {% endfor %}
+
+    </div>
+</body>
+</html>

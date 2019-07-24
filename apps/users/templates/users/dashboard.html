@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header_box">
+            <div class="welcome_box">
+                <h1>Hello {{user.first_name}}!</h1>
+            </div>
+            <div class="links">
+                <a href="/logout">Logout</a>
+                <button><a href="organization/new">Create a new org!</a></button>
+            </div>
+        </div>
+
+        <div class="box_header">
+            <h4>Your Organizations:</h4>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">Organization</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user_org in user_org %}
+                <tr>
+                    <th scope="row"><a href="/organization/{{user_org.id}}">{{ user_org.organization }}</a></th>
+                    <td>{{ user_org.description }}</td>
+                    <td>
+                        <a href="/organization/remove/{{ user_org.id }}">Remove</a> 
+                        <a href="/organization/edit/{{ user_org.id }}">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% for joined in org_joined %}
+                <tr>
+                    <th scope="row"><a href="/organization/{{joined.id}}">{{ joined.organization }}</a></th>
+                    <td>{{ joined.description }}</td>
+                    <td>
+                        <a href="/organization/cancel/{{ joined.id }}">Cancel</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="box_header">
+            <h4>Other people's orgs:</h4>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Organization</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for org in org %}
+                <tr>
+                    <th scope="row"><a href="/organization/{{org.id}}">{{org.organization}}</a></th>
+                    <td>{{org.organization}}</td>
+                    <td>{{org.description}}</td>
+                    <td>
+                        <a href="organization/join/{{org.id}}">Join</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>s
